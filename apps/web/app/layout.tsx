@@ -7,7 +7,7 @@ const sans = Manrope({ subsets: ["latin"], variable: "--font-sans" });
 const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
-  title: "Aster · Your companion",
+  title: "Companion",
   description: "A continuous, time-aware personal companion.",
 };
 
@@ -19,9 +19,9 @@ export default function RootLayout({
       <body className={`${sans.variable} ${serif.variable}`}>
         <div className="ambient-bg" aria-hidden="true" />
         <header className="app-header">
-          <Link className="wordmark" href="/" aria-label="Aster home">
-            <span>A</span>
-            <strong>Aster</strong>
+          <Link className="wordmark" href="/" aria-label="Companion home">
+            <span>C</span>
+            <strong>Companion</strong>
           </Link>
           <nav aria-label="Primary navigation">
             <Link href="/today">Today</Link>

@@ -1,6 +1,6 @@
-# Aster Companion
+# Companion
 
-Aster is an early foundation for a continuous, time-aware AI companion. It is intentionally built around one ongoing relationship rather than separate chat threads.
+This is an early foundation for a continuous, time-aware AI companion. It is intentionally built around one ongoing relationship rather than separate chat threads.
 
 The current repository provides a runnable visual and conversational prototype plus stable boundaries for model providers, routing, context compilation, and future memory infrastructure. It does **not** claim to provide durable AI memory yet.
 
