@@ -36,6 +36,10 @@ shared + memory + ai + ui ← web
 
 This separation gives each developer broad areas where changes do not overlap. Contract changes should be small, reviewed commits rather than mixed into UI or storage work.
 
+## Orb visual adapter
+
+`packages/ui/src/companion-orb.tsx` owns the boundary to `thinking-orbs`. The application speaks in product states (`idle`, `thinking`, `speaking`, and so on); only this adapter knows the library's rendering states (`breathing`, `searching`, `composing`, etc.). This keeps a future visual replacement local to the UI package and prevents the animation library from becoming a domain dependency.
+
 ## Runtime boundaries
 
 - External request data is validated with Zod in the API route.

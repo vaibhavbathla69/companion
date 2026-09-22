@@ -6,16 +6,16 @@ The current repository provides a runnable visual and conversational prototype p
 
 ## Status
 
-| Area                           | Status          | Notes                                                                         |
-| ------------------------------ | --------------- | ----------------------------------------------------------------------------- |
-| Main companion experience      | **IMPLEMENTED** | Responsive UI, reusable 3D orb, reduced-motion/WebGL fallback                 |
-| Conversation transport         | **IMPLEMENTED** | Validated request and streamed response                                       |
-| Model provider                 | **MOCK**        | Deterministic local replies; no API key required                              |
-| Model router                   | **IMPLEMENTED** | Deterministic development router; Jev integration planned                     |
-| Context compiler               | **IMPLEMENTED** | Builds a bounded package from time, relationship, memory, and recent messages |
-| Today and Memory views         | **MOCK**        | Working views backed by typed mock data                                       |
-| Persistent memory and database | **PLANNED**     | Ports exist; no database or vector index is fabricated                        |
-| Consolidation                  | **PLANNED**     | Contract and lifecycle documented only                                        |
+| Area                           | Status          | Notes                                                                          |
+| ------------------------------ | --------------- | ------------------------------------------------------------------------------ |
+| Main companion experience      | **IMPLEMENTED** | Responsive UI, reusable `thinking-orbs` visual, reduced-motion canvas behavior |
+| Conversation transport         | **IMPLEMENTED** | Validated request and streamed response                                        |
+| Model provider                 | **MOCK**        | Deterministic local replies; no API key required                               |
+| Model router                   | **IMPLEMENTED** | Deterministic development router; Jev integration planned                      |
+| Context compiler               | **IMPLEMENTED** | Builds a bounded package from time, relationship, memory, and recent messages  |
+| Today and Memory views         | **MOCK**        | Working views backed by typed mock data                                        |
+| Persistent memory and database | **PLANNED**     | Ports exist; no database or vector index is fabricated                         |
+| Consolidation                  | **PLANNED**     | Contract and lifecycle documented only                                         |
 
 ## Run locally
 
@@ -56,3 +56,7 @@ pnpm build        # Production build
 - `docs` — focused architectural notes and implementation status.
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) before adding infrastructure.
+
+## Orb visual
+
+The product-level `CompanionOrb` wraps the MIT-licensed [`thinking-orbs`](https://libraries.dev/orbs) package. The wrapper keeps our product state vocabulary stable while mapping it to the library's tuned canvas states. It applies our palette, density, speed, accessibility label, and sleeping behavior. The package is a replaceable visual adapter rather than a domain dependency.
