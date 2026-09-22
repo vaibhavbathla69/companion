@@ -1,0 +1,11 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+allowBuilds:
+  # Native resolver used by eslint; required for local linting.
+  unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - '@next/eslint-plugin-next@16.3.6'
+  - eslint-config-next@16.3.6
