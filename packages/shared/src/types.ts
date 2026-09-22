@@ -18,4 +18,3 @@ export type ConversationMessage = z.infer<typeof conversationMessageSchema>;
 export type ConversationRequest = z.infer<typeof conversationRequestSchema>;
 
 export type LifecycleStatus = "implemented" | "mock" | "planned";
-

@@ -1,13 +1,32 @@
-import type { CompiledContext, ContextCompiler, ContextCompilerInput } from "./contracts";
+import type {
+  CompiledContext,
+  ContextCompiler,
+  ContextCompilerInput,
+} from "./contracts";
 
 export class DefaultContextCompiler implements ContextCompiler {
   async compile(input: ContextCompilerInput): Promise<CompiledContext> {
     const { memory, relationship } = input;
-    const longTerm = memory.relevantLongTerm.map((item) => `- ${item.title}: ${item.detail} [${item.metadata.kind}, ${item.metadata.confidence}]`).join("\n") || "- None retrieved";
-    const threads = memory.activeThreads.map((thread) => `- ${thread.subject}: ${thread.detail} (${thread.status})`).join("\n") || "- None";
+    const longTerm =
+      memory.relevantLongTerm
+        .map(
+          (item) =>
+            `- ${item.title}: ${item.detail} [${item.metadata.kind}, ${item.metadata.confidence}]`,
+        )
+        .join("\n") || "- None retrieved";
+    const threads =
+      memory.activeThreads
+        .map(
+          (thread) =>
+            `- ${thread.subject}: ${thread.detail} (${thread.status})`,
+        )
+        .join("\n") || "- None";
 
     return {
-      includedMemoryIds: [...memory.relevantLongTerm, ...memory.relevantEpisodes].map((item) => item.id),
+      includedMemoryIds: [
+        ...memory.relevantLongTerm,
+        ...memory.relevantEpisodes,
+      ].map((item) => item.id),
       system: [
         "You are a continuous personal companion, not a customer-support bot or therapist.",
         "Be warm, observant, concise, and natural. Do not narrate emotion scores or claim memories not supplied here.",
@@ -22,4 +41,3 @@ export class DefaultContextCompiler implements ContextCompiler {
     };
   }
 }
-

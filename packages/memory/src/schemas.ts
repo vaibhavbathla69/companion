@@ -1,4 +1,8 @@
-import { knowledgeMetadataSchema, isoDateTimeSchema, userIdSchema } from "@companion/shared";
+import {
+  knowledgeMetadataSchema,
+  isoDateTimeSchema,
+  userIdSchema,
+} from "@companion/shared";
 import { z } from "zod";
 
 export const workingMemorySchema = z.object({
@@ -41,7 +45,14 @@ export const dailyMemorySchema = z.object({
 
 export const rememberedItemSchema = z.object({
   id: z.string().min(1),
-  category: z.enum(["about", "people", "memory", "goal", "current-life", "pattern"]),
+  category: z.enum([
+    "about",
+    "people",
+    "memory",
+    "goal",
+    "current-life",
+    "pattern",
+  ]),
   title: z.string().min(1),
   detail: z.string().min(1),
   metadata: knowledgeMetadataSchema,
@@ -62,4 +73,3 @@ export type CuriosityItem = z.infer<typeof curiosityItemSchema>;
 export type DailyMemory = z.infer<typeof dailyMemorySchema>;
 export type RememberedItem = z.infer<typeof rememberedItemSchema>;
 export type MemoryContext = z.infer<typeof memoryContextSchema>;
-

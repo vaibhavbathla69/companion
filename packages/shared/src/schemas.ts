@@ -23,6 +23,7 @@ export const knowledgeMetadataSchema = z.object({
 
 export const relationshipStateSchema = z.object({
   relationshipStartedAt: isoDateTimeSchema,
+  relationshipAgeDays: z.number().nonnegative(),
   closeness: z.number().min(0).max(1),
   interactionFrequency: z.enum(["new", "occasional", "regular", "frequent"]),
   tone: z.enum(["gentle", "playful", "direct", "quiet", "warm"]),
@@ -46,4 +47,3 @@ export const conversationRequestSchema = z.object({
   localTime: isoDateTimeSchema,
   timeZone: z.string().min(1).max(100),
 });
-

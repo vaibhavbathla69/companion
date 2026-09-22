@@ -2,7 +2,8 @@ import type { MemoryContext } from "@companion/memory";
 import type { ConversationMessage, RelationshipState } from "@companion/shared";
 import type { z } from "zod";
 
-export type ModelTask = "conversation" | "memory-extraction" | "consolidation" | "reasoning";
+export type ModelTask =
+  "conversation" | "memory-extraction" | "consolidation" | "reasoning";
 
 export interface ModelSelection {
   providerId: string;
@@ -17,8 +18,14 @@ export interface GenerationRequest {
   temperature?: number;
 }
 
-export interface GenerationResult { text: string; model: ModelSelection; }
-export interface GenerationChunk { text: string; done: boolean; }
+export interface GenerationResult {
+  text: string;
+  model: ModelSelection;
+}
+export interface GenerationChunk {
+  text: string;
+  done: boolean;
+}
 
 export interface StructuredGenerationRequest<T> extends GenerationRequest {
   schema: z.ZodType<T>;
@@ -51,4 +58,3 @@ export interface CompiledContext {
 export interface ContextCompiler {
   compile(input: ContextCompilerInput): Promise<CompiledContext>;
 }
-
