@@ -8,15 +8,23 @@ import {
 } from "@companion/ui";
 import { MetalFx, useMetalBend } from "metal-fx";
 import { ThinkingOrb } from "thinking-orbs";
-import { type FormEvent, useEffect, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  type FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 export default function HomePage() {
   const voiceRef = useRef<HTMLDivElement>(null);
   const keyboardRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const conversationRef = useRef<HTMLElement>(null);
   const [activeMode, setActiveMode] = useState<"voice" | "keyboard">("voice");
   const [message, setMessage] = useState("");
   const [humanMessages, setHumanMessages] = useState<string[]>([]);
+  const [isReviewingHistory, setIsReviewingHistory] = useState(false);
   const dummyResponses = [
     [
       { text: "I’m here. ", weight: 200 as const },
@@ -30,6 +38,18 @@ export default function HomePage() {
   useEffect(() => {
     if (activeMode === "keyboard") inputRef.current?.focus();
   }, [activeMode]);
+
+  useEffect(() => {
+    if (activeMode !== "keyboard") return;
+    const conversation = conversationRef.current;
+    if (!conversation) return;
+
+    conversation.scrollTo({
+      top: conversation.scrollHeight,
+      behavior: "smooth",
+    });
+    setIsReviewingHistory(false);
+  }, [activeMode, humanMessages.length]);
 
   function submitMessage(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,25 +65,68 @@ export default function HomePage() {
       <main className={`orb-composition-stage mode-${activeMode}`}>
         <CompanionOrb state="solving" intensity={0.8} />
         {activeMode === "keyboard" && (
-          <div className="dialogue-stage" aria-live="polite">
-            <AIMessage
-              segments={[
-                { text: "where have you ", weight: 200 },
-                { text: "been?", weight: 450 },
-              ]}
-            />
-            {humanMessages.map((humanMessage, index) => (
-              <div key={`${index}-${humanMessage}`} className="dialogue-turn">
-                <HumanMessage
-                  className="dialogue-human-enter"
-                  segments={[{ text: humanMessage }]}
-                />
-                <AIMessage
-                  className="dialogue-ai-reply dialogue-ai-enter"
-                  segments={dummyResponses[index % dummyResponses.length]}
-                />
+          <>
+            <section
+              ref={conversationRef}
+              className={`dialogue-stage${isReviewingHistory ? " is-reviewing-history" : ""}`}
+              aria-live="polite"
+              aria-label="Conversation"
+              onScroll={(event) => {
+                const { scrollHeight, scrollTop, clientHeight } =
+                  event.currentTarget;
+                setIsReviewingHistory(
+                  scrollTop < scrollHeight - clientHeight - 24,
+                );
+              }}
+            >
+              <div className="dialogue-stack">
+                <div
+                  className="dialogue-turn"
+                  data-age={humanMessages.length}
+                  style={
+                    {
+                      "--conversation-opacity": Math.max(
+                        0.14,
+                        1 - humanMessages.length * 0.2,
+                      ),
+                    } as CSSProperties
+                  }
+                >
+                  <AIMessage
+                    segments={[
+                      { text: "where have you ", weight: 200 },
+                      { text: "been?", weight: 450 },
+                    ]}
+                  />
+                </div>
+                {humanMessages.map((humanMessage, index) => {
+                  const age = humanMessages.length - index - 1;
+                  return (
+                    <div
+                      key={`${index}-${humanMessage}`}
+                      className="dialogue-turn"
+                      data-age={age}
+                      style={
+                        {
+                          "--conversation-opacity": [1, 0.82, 0.58, 0.34, 0.16][
+                            Math.min(age, 4)
+                          ],
+                        } as CSSProperties
+                      }
+                    >
+                      <HumanMessage
+                        className="dialogue-human-enter"
+                        segments={[{ text: humanMessage }]}
+                      />
+                      <AIMessage
+                        className="dialogue-ai-reply dialogue-ai-enter"
+                        segments={dummyResponses[index % dummyResponses.length]}
+                      />
+                    </div>
+                  );
+                })}
               </div>
-            ))}
+            </section>
             <form className="keyboard-message-field" onSubmit={submitMessage}>
               <label className="sr-only" htmlFor="keyboard-message">
                 Message
@@ -76,7 +139,7 @@ export default function HomePage() {
                 aria-label="Type a message"
               />
             </form>
-          </div>
+          </>
         )}
         <div
           className="input-mode-buttons"

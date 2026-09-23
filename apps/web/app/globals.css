@@ -41,16 +41,19 @@ body {
   font-family: "Nohemi Variable", var(--font-sans), system-ui, sans-serif;
   font-optical-sizing: auto;
   font-variation-settings: "wght" 200;
-  transition: font-variation-settings 220ms ease;
+  transition:
+    font-variation-settings 600ms ease,
+    font-weight 600ms ease;
   text-wrap: pretty;
 }
 
 .dialogue span {
-  transition: font-weight 220ms ease;
+  transition: font-weight 600ms ease;
 }
 
 .dialogue-ai {
-  font-size: clamp(2rem, 5vw, 4.5rem);
+  max-width: min(680px, 100%);
+  font-size: clamp(34px, 3vw, 40px);
   font-weight: 200;
   line-height: 1.08;
   letter-spacing: -0.045em;
@@ -61,7 +64,9 @@ body {
 }
 
 .dialogue-human {
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  width: min(410px, 55%);
+  margin-left: clamp(112px, 31vw, 420px);
+  font-size: clamp(16px, 1.4vw, 19px);
   font-weight: 500;
   line-height: 1.35;
   letter-spacing: -0.02em;
@@ -102,36 +107,56 @@ body {
 }
 
 .orb-composition-stage.mode-keyboard > .companion-orb {
-  opacity: 0;
-  scale: 0.9;
+  top: auto;
+  bottom: 186px;
+  left: min(calc(100% - 130px), calc(50% + 220px));
+  opacity: 0.9;
+  scale: 0.72;
 }
 
 .dialogue-stage {
   position: absolute;
-  bottom: 140px;
-  left: 48px;
-  width: min(720px, calc(100% - 48px));
-  animation: dialogue-rise 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  inset: 0 0 116px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
-@keyframes dialogue-rise {
-  from {
-    opacity: 0;
-    transform: translateY(42px);
-  }
-  65% {
-    opacity: 1;
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.dialogue-stage::-webkit-scrollbar {
+  display: none;
+}
+
+.dialogue-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100%;
+  width: min(760px, calc(100% - 96px));
+  padding: 160px 0 64px;
+  margin-left: 48px;
+}
+
+.dialogue-turn {
+  opacity: var(--conversation-opacity, 1);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dialogue-turn + .dialogue-turn {
+  margin-top: 54px;
+}
+
+.dialogue-stage.is-reviewing-history .dialogue-turn {
+  opacity: 1;
 }
 
 .keyboard-message-field {
-  display: block;
+  position: absolute;
+  bottom: 116px;
+  left: 48px;
   width: min(440px, 100%);
-  margin-top: 28px;
 }
 
 .dialogue-human-enter {
@@ -140,18 +165,18 @@ body {
 }
 
 .dialogue-ai-reply {
-  margin-top: 16px;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: 14px;
+  font-size: clamp(30px, 2.8vw, 38px);
 }
 
 .dialogue-ai-enter {
-  animation: ai-message-enter 440ms 120ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: ai-message-enter 720ms 120ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes ai-message-enter {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(22px);
   }
   to {
     opacity: 1;
