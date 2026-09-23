@@ -1,4 +1,5 @@
 import { CompanionOrb, ViewportBorderBeam } from "@companion/ui";
+import { MetalFx } from "metal-fx";
 
 export default function HomePage() {
   return (
@@ -10,22 +11,38 @@ export default function HomePage() {
           role="group"
           aria-label="Input mode"
         >
-          <button
-            className="input-mode-button"
-            type="button"
-            aria-label="Voice input"
+          <MetalFx
+            preset="silver"
+            strength={1}
+            theme="dark"
+            variant="button"
+            innerShadow
           >
-            <span aria-hidden="true">◉</span>
-            <span>Voice</span>
-          </button>
-          <button
-            className="input-mode-button"
-            type="button"
-            aria-label="Keyboard input"
+            <button
+              className="input-mode-button"
+              type="button"
+              aria-label="Voice input"
+            >
+              <span aria-hidden="true">◉</span>
+              <span>Voice</span>
+            </button>
+          </MetalFx>
+          <MetalFx
+            preset="silver"
+            strength={1}
+            theme="dark"
+            variant="button"
+            innerShadow
           >
-            <span aria-hidden="true">⌨</span>
-            <span>Keyboard</span>
-          </button>
+            <button
+              className="input-mode-button"
+              type="button"
+              aria-label="Keyboard input"
+            >
+              <span aria-hidden="true">⌨</span>
+              <span>Keyboard</span>
+            </button>
+          </MetalFx>
         </div>
       </main>
     </ViewportBorderBeam>
