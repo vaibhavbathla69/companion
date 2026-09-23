@@ -65,6 +65,10 @@ body {
   transform: translateX(-50%);
 }
 
+.input-mode-buttons .metal-fx-root {
+  background: #000 !important;
+}
+
 .input-mode-button {
   position: relative;
   z-index: 2;
