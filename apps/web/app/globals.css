@@ -55,6 +55,50 @@ body {
   translate: -50% -50%;
 }
 
+.input-mode-buttons {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+  transform: translateX(-50%);
+}
+
+.input-mode-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 112px;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 12px;
+  color: #e7e2dc;
+  background: linear-gradient(145deg, #292929, #151515);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 8px 24px rgb(0 0 0 / 0.4);
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.input-mode-button:hover {
+  border-color: rgb(255 255 255 / 0.3);
+  background: linear-gradient(145deg, #333, #1a1a1a);
+  transform: translateY(-1px);
+}
+
+.input-mode-button:active {
+  transform: translateY(0);
+}
+
 .thinking-orb-strip {
   display: flex;
   align-items: center;
