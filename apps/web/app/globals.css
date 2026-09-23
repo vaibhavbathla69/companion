@@ -55,21 +55,24 @@ body {
   position: fixed;
   z-index: 20;
   inset: 0;
+  box-sizing: border-box;
+  padding: 1px;
   pointer-events: none;
-  border: 1px solid transparent;
-  background:
-    linear-gradient(transparent, transparent) padding-box,
-    conic-gradient(
-        from var(--viewport-beam-angle, 0deg),
-        #4b4b4b 0deg,
-        #d4d4d4 52deg,
-        #656565 102deg,
-        #f0f0f0 180deg,
-        #555 238deg,
-        #c8c8c8 292deg,
-        #4b4b4b 360deg
-      )
-      border-box;
+  background: conic-gradient(
+    from var(--viewport-beam-angle, 0deg),
+    #4b4b4b 0deg,
+    #d4d4d4 52deg,
+    #656565 102deg,
+    #f0f0f0 180deg,
+    #555 238deg,
+    #c8c8c8 292deg,
+    #4b4b4b 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   animation: viewport-beam-travel 7s linear infinite;
 }
 
