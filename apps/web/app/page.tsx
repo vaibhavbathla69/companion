@@ -14,28 +14,47 @@ import { VoiceBeam, useMicrophone } from "voice-glow";
 const lifeState = {
   date: { day: "23", month: "SEP", time: "21:18" },
   today: [
-    { meta: "10:30", title: "Client calls", state: "completed" as const },
     {
+      id: "client-calls",
+      meta: "10:30",
+      title: "Client calls",
+      state: "completed" as const,
+    },
+    {
+      id: "meet-sam",
       meta: "15:00",
       title: "Meet Sam",
       description: "about the partnership",
       state: "upcoming" as const,
     },
-    { meta: "NOW", title: "Working on N", state: "now" as const },
-    { meta: "22:00", title: "Call mum", state: "important" as const },
+    {
+      id: "working-on-n",
+      meta: "NOW",
+      title: "Working on N",
+      state: "now" as const,
+    },
+    {
+      id: "call-mum",
+      meta: "22:00",
+      title: "Call mum",
+      state: "important" as const,
+    },
   ],
   open: [
     {
+      id: "sam-thread",
       meta: "SAM",
       title: "You were supposed to hear back from him today.",
       state: "important" as const,
     },
     {
+      id: "website-thread",
       meta: "WEBSITE",
       title: "Still working on the new project section.",
       state: "upcoming" as const,
     },
     {
+      id: "client-replies",
       meta: "CLIENTS",
       title: "3 replies waiting.",
       state: "upcoming" as const,
@@ -43,11 +62,17 @@ const lifeState = {
   ],
   later: [
     {
+      id: "partnership-note",
       meta: "FRI",
       title: "Send the partnership note.",
       state: "upcoming" as const,
     },
-    { meta: "SAT", title: "Dinner with Mum.", state: "important" as const },
+    {
+      id: "dinner-mum",
+      meta: "SAT",
+      title: "Dinner with Mum.",
+      state: "important" as const,
+    },
   ],
 };
 import {
@@ -114,7 +139,7 @@ export default function HomePage() {
     <ViewportBorderBeam>
       <main className={`orb-composition-stage mode-${activeMode}`}>
         <CompanionOrb state="solving" intensity={0.8} />
-        <LifeStatePanel data={lifeState} />
+        <LifeStatePanel data={lifeState} referencedItemId="meet-sam" />
         {activeMode !== "idle" && (
           <>
             <section

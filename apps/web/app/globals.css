@@ -93,10 +93,15 @@ body {
   opacity: 0.88;
 }
 
+.life-state-panel.has-context-focus {
+  opacity: 0.46;
+}
+
 .life-state-date {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 14px;
   margin-bottom: 38px;
 }
 
@@ -126,7 +131,8 @@ body {
 }
 
 .life-state-time {
-  padding-bottom: 1px;
+  align-self: flex-start;
+  padding-top: 7px;
   opacity: 0.64;
 }
 
@@ -187,12 +193,18 @@ body {
 
 .life-state-item {
   max-width: 255px;
-  opacity: 0.62;
-  transition: opacity 800ms ease;
+  opacity: 0.56;
+  transition:
+    opacity 1400ms ease,
+    transform 1400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .life-state-item.state-completed {
   opacity: 0.25;
+}
+
+.life-state-item.state-recent {
+  opacity: 0.4;
 }
 
 .life-state-item.state-now {
@@ -200,7 +212,12 @@ body {
 }
 
 .life-state-item.state-important {
+  opacity: 0.6;
+}
+
+.life-state-item.is-context-focused {
   opacity: 0.78;
+  transform: translateY(-1px);
 }
 
 .life-state-item-meta {
@@ -226,6 +243,11 @@ body {
 .life-state-item.state-important .life-state-item-title,
 .life-state-item.state-now .life-state-item-title {
   font-weight: 450;
+}
+
+.life-state-item.state-now .life-state-item-title {
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .life-state-item-description {

@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type LifeStateView = "today" | "open" | "later";
 
 export interface LifeStateItem {
+  id: string;
   title: string;
   meta?: string;
   description?: string;
-  state?: "completed" | "upcoming" | "now" | "important";
+  state?: "completed" | "recent" | "upcoming" | "now" | "important";
 }
 
 export interface LifeStateData {
@@ -21,6 +22,7 @@ export interface LifeStateData {
 export interface LifeStatePanelProps {
   data: LifeStateData;
   initialView?: LifeStateView;
+  referencedItemId?: string;
 }
 
 const labels: Record<LifeStateView, string> = {
@@ -33,12 +35,24 @@ const labels: Record<LifeStateView, string> = {
 export function LifeStatePanel({
   data,
   initialView = "today",
+  referencedItemId,
 }: LifeStatePanelProps) {
   const [view, setView] = useState<LifeStateView>(initialView);
+  const [isContextFocused, setIsContextFocused] = useState(false);
   const items = data[view];
 
+  useEffect(() => {
+    if (!referencedItemId) return;
+    setIsContextFocused(true);
+    const timeout = window.setTimeout(() => setIsContextFocused(false), 4600);
+    return () => window.clearTimeout(timeout);
+  }, [referencedItemId]);
+
   return (
-    <aside className="life-state-panel" aria-label="Life state">
+    <aside
+      className={`life-state-panel${isContextFocused ? " has-context-focus" : ""}`}
+      aria-label="Life state"
+    >
       <header className="life-state-date">
         <time dateTime="2026-09-23">
           <span className="life-state-day">{data.date.day}</span>
@@ -66,8 +80,12 @@ export function LifeStatePanel({
         <div className="life-state-items">
           {items.map((item) => (
             <article
-              key={`${item.meta ?? ""}-${item.title}`}
-              className={`life-state-item state-${item.state ?? "upcoming"}`}
+              key={item.id}
+              className={`life-state-item state-${item.state ?? "upcoming"}${
+                isContextFocused && item.id === referencedItemId
+                  ? " is-context-focused"
+                  : ""
+              }`}
             >
               <div className="life-state-item-meta">
                 {item.state === "now" && (
