@@ -25,7 +25,8 @@ export default function HomePage() {
             preset="chromatic"
             variant="circle"
             innerShadow
-            strength={0.9}
+            strength={0}
+            disableGlow
             reflectionTargets={[keyboardRef]}
           >
             <button
@@ -41,7 +42,8 @@ export default function HomePage() {
             preset="chromatic"
             variant="circle"
             innerShadow
-            strength={0.9}
+            strength={0}
+            disableGlow
             reflectionTargets={[voiceRef]}
           >
             <button
