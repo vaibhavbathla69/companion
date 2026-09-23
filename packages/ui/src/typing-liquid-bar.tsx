@@ -1,9 +1,7 @@
 "use client";
 
 import { Liquid } from "liquid-gooey";
-import type { ReactNode } from "react";
-
-export function TypingLiquidBar({ children }: { children: ReactNode }) {
+export function TypingLiquidBar() {
   return (
     <Liquid
       className="typing-liquid-bar"
@@ -14,7 +12,7 @@ export function TypingLiquidBar({ children }: { children: ReactNode }) {
       aria-label="Typing bar"
     >
       <Liquid.Item effect="bend" transition="bouncy">
-        <div className="typing-liquid-bar-content">{children}</div>
+        <div className="typing-liquid-bar-content" />
       </Liquid.Item>
     </Liquid>
   );
