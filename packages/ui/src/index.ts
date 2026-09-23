@@ -3,3 +3,4 @@ export * from "./companion-orb";
 export * from "./memory-view";
 export * from "./today-view";
 export * from "./viewport-border-beam";
+export * from "./typing-liquid-bar";

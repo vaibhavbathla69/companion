@@ -1,6 +1,7 @@
 import {
   CompanionOrb,
   ThinkingOrbStrip,
+  TypingLiquidBar,
   ViewportBorderBeam,
 } from "@companion/ui";
 
@@ -9,7 +10,9 @@ export default function HomePage() {
     <ViewportBorderBeam>
       <main className="orb-composition-stage">
         <CompanionOrb state="solving" intensity={0.8} />
-        <ThinkingOrbStrip />
+        <TypingLiquidBar>
+          <ThinkingOrbStrip />
+        </TypingLiquidBar>
       </main>
     </ViewportBorderBeam>
   );

@@ -52,15 +52,27 @@ body {
 }
 
 .thinking-orb-strip {
-  position: absolute;
-  right: 16px;
-  bottom: 28px;
-  left: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 100%;
   overflow: hidden;
+}
+
+.typing-liquid-bar {
+  position: absolute;
+  right: 16px;
+  bottom: 28px;
+  left: 16px;
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  margin-inline: auto;
+  border-radius: 999px;
+}
+
+.typing-liquid-bar-content {
+  padding: 8px 14px;
+  border-radius: 999px;
 }
 
 .thinking-orb-strip canvas {
