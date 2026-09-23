@@ -40,7 +40,7 @@ export default function HomePage() {
                 dots={1}
                 dotSize={1}
                 theme="dark"
-                color="#d7b99d"
+                color="#ffffff"
               />
             </button>
           </MetalFx>
