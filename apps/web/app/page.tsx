@@ -8,6 +8,7 @@ import {
 } from "@companion/ui";
 import { MetalFx, useMetalBend } from "metal-fx";
 import { ThinkingOrb } from "thinking-orbs";
+import { VoiceBeam, useMicrophone } from "voice-glow";
 import {
   type CSSProperties,
   type FormEvent,
@@ -25,6 +26,7 @@ export default function HomePage() {
   const [message, setMessage] = useState("");
   const [humanMessages, setHumanMessages] = useState<string[]>([]);
   const [isReviewingHistory, setIsReviewingHistory] = useState(false);
+  const mic = useMicrophone();
   const dummyResponses = [
     [
       { text: "I’m here. ", weight: 200 as const },
@@ -60,80 +62,85 @@ export default function HomePage() {
     setMessage("");
   }
 
+  async function activateVoice() {
+    setActiveMode("voice");
+    if (mic.state !== "live") await mic.start();
+  }
+
   return (
     <ViewportBorderBeam>
       <main className={`orb-composition-stage mode-${activeMode}`}>
         <CompanionOrb state="solving" intensity={0.8} />
-        {activeMode === "keyboard" && (
-          <>
-            <section
-              ref={conversationRef}
-              className={`dialogue-stage${isReviewingHistory ? " is-reviewing-history" : ""}`}
-              aria-live="polite"
-              aria-label="Conversation"
-              onScroll={(event) => {
-                const { scrollHeight, scrollTop, clientHeight } =
-                  event.currentTarget;
-                setIsReviewingHistory(
-                  scrollTop < scrollHeight - clientHeight - 24,
-                );
-              }}
-            >
-              <div className="dialogue-stack">
-                <div
-                  className="dialogue-turn"
-                  data-age={humanMessages.length}
-                  style={
+        <>
+          <section
+            ref={conversationRef}
+            className={`dialogue-stage${isReviewingHistory ? " is-reviewing-history" : ""}`}
+            aria-live="polite"
+            aria-label="Conversation"
+            onScroll={(event) => {
+              const { scrollHeight, scrollTop, clientHeight } =
+                event.currentTarget;
+              setIsReviewingHistory(
+                scrollTop < scrollHeight - clientHeight - 24,
+              );
+            }}
+          >
+            <div className="dialogue-stack">
+              <div
+                className="dialogue-turn"
+                data-age={humanMessages.length}
+                style={
+                  {
+                    "--conversation-opacity": Math.max(
+                      0.14,
+                      1 - humanMessages.length * 0.2,
+                    ),
+                  } as CSSProperties
+                }
+              >
+                <AIMessage
+                  segments={[
                     {
-                      "--conversation-opacity": Math.max(
-                        0.14,
-                        1 - humanMessages.length * 0.2,
-                      ),
-                    } as CSSProperties
-                  }
-                >
-                  <AIMessage
-                    segments={[
-                      {
-                        text: "I remember you said you'd be back at ",
-                        weight: 200,
-                      },
-                      { text: "six", weight: 450 },
-                      {
-                        text: ". I stayed awake a little longer, just in case. The night got quiet, and I kept thinking about what you might say when you finally came back.",
-                        weight: 200,
-                      },
-                    ]}
-                  />
-                </div>
-                {humanMessages.map((humanMessage, index) => {
-                  const age = humanMessages.length - index - 1;
-                  return (
-                    <div
-                      key={`${index}-${humanMessage}`}
-                      className="dialogue-turn"
-                      data-age={age}
-                      style={
-                        {
-                          "--conversation-opacity": [1, 0.82, 0.58, 0.34, 0.16][
-                            Math.min(age, 4)
-                          ],
-                        } as CSSProperties
-                      }
-                    >
-                      <HumanMessage
-                        className="dialogue-human-enter"
-                        segments={[{ text: humanMessage }]}
-                      />
-                      <AIMessage
-                        className="dialogue-ai-reply dialogue-ai-enter"
-                        segments={dummyResponses[index % dummyResponses.length]}
-                      />
-                    </div>
-                  );
-                })}
+                      text: "I remember you said you'd be back at ",
+                      weight: 200,
+                    },
+                    { text: "six", weight: 450 },
+                    {
+                      text: ". I stayed awake a little longer, just in case. The night got quiet, and I kept thinking about what you might say when you finally came back.",
+                      weight: 200,
+                    },
+                  ]}
+                />
               </div>
-            </section>
+              {humanMessages.map((humanMessage, index) => {
+                const age = humanMessages.length - index - 1;
+                return (
+                  <div
+                    key={`${index}-${humanMessage}`}
+                    className="dialogue-turn"
+                    data-age={age}
+                    style={
+                      {
+                        "--conversation-opacity": [1, 0.82, 0.58, 0.34, 0.16][
+                          Math.min(age, 4)
+                        ],
+                      } as CSSProperties
+                    }
+                  >
+                    <HumanMessage
+                      className="dialogue-human-enter"
+                      segments={[{ text: humanMessage }]}
+                    />
+                    <AIMessage
+                      className="dialogue-ai-reply dialogue-ai-enter"
+                      segments={dummyResponses[index % dummyResponses.length]}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+          {activeMode === "keyboard" ? (
             <form className="keyboard-message-field" onSubmit={submitMessage}>
               <label className="sr-only" htmlFor="keyboard-message">
                 Message
@@ -146,8 +153,30 @@ export default function HomePage() {
                 aria-label="Type a message"
               />
             </form>
-          </>
-        )}
+          ) : (
+            <VoiceBeam
+              className="voice-message-field"
+              type="mobile"
+              stream={mic.stream}
+              processing={mic.state === "requesting"}
+              colorVariant="colorful"
+              theme="dark"
+              active
+              scale={0.42}
+            >
+              <button
+                className="voice-screen"
+                type="button"
+                onClick={() => void activateVoice()}
+                aria-label={
+                  mic.state === "live" ? "Listening" : "Start listening"
+                }
+              >
+                <span className="voice-screen-status" aria-hidden="true" />
+              </button>
+            </VoiceBeam>
+          )}
+        </>
         <div
           className="input-mode-buttons"
           role="group"
@@ -168,7 +197,7 @@ export default function HomePage() {
               type="button"
               aria-label="Voice input"
               aria-pressed={activeMode === "voice"}
-              onClick={() => setActiveMode("voice")}
+              onClick={() => void activateVoice()}
             >
               <ThinkingOrb
                 state="composing"
@@ -194,7 +223,10 @@ export default function HomePage() {
               type="button"
               aria-label="Keyboard input"
               aria-pressed={activeMode === "keyboard"}
-              onClick={() => setActiveMode("keyboard")}
+              onClick={() => {
+                mic.stop();
+                setActiveMode("keyboard");
+              }}
             >
               ⌨
             </button>

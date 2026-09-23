@@ -20,6 +20,7 @@
     "react-dom": "19.3.0",
     "tailwindcss": "4.3.3",
     "thinking-orbs": "^0.3.2",
+    "voice-glow": "^0.2.0",
     "zod": "4.6.5"
   },
   "devDependencies": {
