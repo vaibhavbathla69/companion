@@ -58,7 +58,7 @@ body {
   pointer-events: none;
   border: 1px solid transparent;
   background:
-    linear-gradient(#000, #000) padding-box,
+    linear-gradient(transparent, transparent) padding-box,
     conic-gradient(
         from var(--viewport-beam-angle, 0deg),
         #4b4b4b 0deg,
