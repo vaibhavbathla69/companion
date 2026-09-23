@@ -1,3 +1,5 @@
+"use client";
+
 import { CompanionOrb, ViewportBorderBeam } from "@companion/ui";
 import { MetalFx } from "metal-fx";
 
