@@ -34,7 +34,7 @@ export default function HomePage() {
               type="button"
               aria-label="Voice input"
             >
-              <ThinkingOrb state="composing" size={64} />
+              <ThinkingOrb state="composing" size={54} />
             </button>
           </MetalFx>
           <MetalFx
