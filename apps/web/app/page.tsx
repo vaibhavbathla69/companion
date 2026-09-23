@@ -1,6 +1,11 @@
 "use client";
 
-import { AIMessage, CompanionOrb, ViewportBorderBeam } from "@companion/ui";
+import {
+  AIMessage,
+  CompanionOrb,
+  HumanMessage,
+  ViewportBorderBeam,
+} from "@companion/ui";
 import { MetalFx, useMetalBend } from "metal-fx";
 import { ThinkingOrb } from "thinking-orbs";
 import { type FormEvent, useEffect, useRef, useState } from "react";
