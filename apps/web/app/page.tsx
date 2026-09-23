@@ -94,8 +94,15 @@ export default function HomePage() {
                 >
                   <AIMessage
                     segments={[
-                      { text: "where have you ", weight: 200 },
-                      { text: "been?", weight: 450 },
+                      {
+                        text: "I remember you said you'd be back at ",
+                        weight: 200,
+                      },
+                      { text: "six", weight: 450 },
+                      {
+                        text: ". I stayed awake a little longer, just in case. The night got quiet, and I kept thinking about what you might say when you finally came back.",
+                        weight: 200,
+                      },
                     ]}
                   />
                 </div>
