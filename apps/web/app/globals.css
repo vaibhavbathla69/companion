@@ -37,8 +37,8 @@ body {
 }
 
 .orb-only-stage .companion-orb {
-  width: min(260px, 62vw);
-  height: min(260px, 62vw);
+  width: 74px;
+  height: 74px;
   margin: 0;
 }
 

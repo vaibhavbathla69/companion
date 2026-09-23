@@ -91,7 +91,7 @@ export function CompanionOrb({
         color={colorMap[state]}
         dots={0.9 + intensity * 0.25}
         dotSize={0.9 + intensity * 0.16}
-        style={{ width: "min(220px, 58vw)", height: "min(220px, 58vw)" }}
+        style={{ width: "74px", height: "74px" }}
         aria-label={labelMap[state]}
       />
       <div className="orb-atmosphere" aria-hidden="true" />
