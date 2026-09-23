@@ -14,6 +14,7 @@
     "@companion/shared": "workspace:*",
     "@companion/ui": "workspace:*",
     "@tailwindcss/postcss": "4.3.3",
+    "metal-fx": "^2.0.10",
     "next": "16.3.6",
     "react": "19.3.0",
     "react-dom": "19.3.0",
