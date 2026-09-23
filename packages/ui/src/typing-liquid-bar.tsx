@@ -7,8 +7,8 @@ export function TypingLiquidBar() {
       <Liquid
         className="typing-liquid-bar-liquid"
         fill="#202020"
-        blur={6}
-        contrast={18}
+        blur={16}
+        contrast={39}
         shadow="0 2px 18px rgb(0 0 0 / 0.35)"
       >
         <Liquid.Item effect="bend" transition="bouncy">
