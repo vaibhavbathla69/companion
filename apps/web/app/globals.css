@@ -335,7 +335,7 @@ body {
 }
 
 .orb-composition-stage.mode-voice .dialogue-stage {
-  bottom: clamp(240px, 38dvh, 520px);
+  bottom: clamp(180px, 30dvh, 380px);
   z-index: 5;
 }
 
@@ -380,8 +380,10 @@ body {
   inset: auto 0 0;
   z-index: 4;
   width: 100dvw;
-  height: clamp(240px, 38dvh, 520px);
+  height: clamp(180px, 30dvh, 380px);
   overflow: hidden;
+  contain: layout paint;
+  isolation: isolate;
   pointer-events: none;
 }
 
@@ -389,6 +391,8 @@ body {
   width: 100% !important;
   height: calc(100% + 2px) !important;
   transform: translateY(2px);
+  contain: layout paint;
+  will-change: transform;
   pointer-events: auto;
 }
 
