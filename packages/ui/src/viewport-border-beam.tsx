@@ -13,7 +13,10 @@ export function ViewportBorderBeam({ children }: { children: ReactNode }) {
       theme="dark"
       borderRadius={0}
     >
-      {children}
+      <div className="viewport-border-beam-content">
+        {children}
+        <div className="viewport-border-beam-fallback" aria-hidden="true" />
+      </div>
     </BorderBeam>
   );
 }
