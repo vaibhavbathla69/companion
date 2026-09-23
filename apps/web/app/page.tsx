@@ -3,14 +3,20 @@
 import { AIMessage, CompanionOrb, ViewportBorderBeam } from "@companion/ui";
 import { MetalFx, useMetalBend } from "metal-fx";
 import { ThinkingOrb } from "thinking-orbs";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function HomePage() {
   const voiceRef = useRef<HTMLDivElement>(null);
   const keyboardRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [activeMode, setActiveMode] = useState<"voice" | "keyboard">("voice");
+  const [message, setMessage] = useState("");
   useMetalBend(voiceRef);
   useMetalBend(keyboardRef);
+
+  useEffect(() => {
+    if (activeMode === "keyboard") inputRef.current?.focus();
+  }, [activeMode]);
 
   return (
     <ViewportBorderBeam>
@@ -24,6 +30,16 @@ export default function HomePage() {
                 { text: "been?", weight: 450 },
               ]}
             />
+            <label className="keyboard-message-field">
+              <span className="sr-only">Message</span>
+              <input
+                ref={inputRef}
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                placeholder="say something"
+                aria-label="Type a message"
+              />
+            </label>
           </div>
         )}
         <div
