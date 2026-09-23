@@ -217,6 +217,9 @@ importers:
       tailwindcss:
         specifier: 4.3.3
         version: 4.3.3
+      thinking-orbs:
+        specifier: ^0.3.2
+        version: 0.3.2(react@19.3.0)
       zod:
         specifier: 4.6.5
         version: 4.6.5
