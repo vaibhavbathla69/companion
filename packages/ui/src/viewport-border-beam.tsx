@@ -12,10 +12,10 @@ export function ViewportBorderBeam({ children }: { children: ReactNode }) {
       colorVariant="mono"
       theme="dark"
       staticColors
-      strength={0.32}
-      brightness={0.58}
+      strength={0.62}
+      brightness={0.78}
       saturation={0}
-      glowSize={0.62}
+      glowSize={0.8}
       borderRadius={0}
     >
       <div className="viewport-border-beam-content">{children}</div>
