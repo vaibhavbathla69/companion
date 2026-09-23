@@ -17,6 +17,13 @@ export default function HomePage() {
   const [activeMode, setActiveMode] = useState<"voice" | "keyboard">("voice");
   const [message, setMessage] = useState("");
   const [humanMessages, setHumanMessages] = useState<string[]>([]);
+  const dummyResponses = [
+    [
+      { text: "I’m here. ", weight: 200 as const },
+      { text: "Tell me more.", weight: 450 as const },
+    ],
+    [{ text: "That sounds like a lot to carry.", weight: 200 as const }],
+  ];
   useMetalBend(voiceRef);
   useMetalBend(keyboardRef);
 
@@ -46,11 +53,16 @@ export default function HomePage() {
               ]}
             />
             {humanMessages.map((humanMessage, index) => (
-              <HumanMessage
-                key={`${index}-${humanMessage}`}
-                className="dialogue-human-enter"
-                segments={[{ text: humanMessage }]}
-              />
+              <div key={`${index}-${humanMessage}`} className="dialogue-turn">
+                <HumanMessage
+                  className="dialogue-human-enter"
+                  segments={[{ text: humanMessage }]}
+                />
+                <AIMessage
+                  className="dialogue-ai-reply dialogue-ai-enter"
+                  segments={dummyResponses[index % dummyResponses.length]}
+                />
+              </div>
             ))}
             <form className="keyboard-message-field" onSubmit={submitMessage}>
               <label className="sr-only" htmlFor="keyboard-message">
