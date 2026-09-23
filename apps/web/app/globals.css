@@ -96,6 +96,30 @@ body {
   height: 74px;
   margin: 0;
   translate: -50% -50%;
+  transition:
+    opacity 260ms ease,
+    scale 260ms ease;
+}
+
+.orb-composition-stage.mode-keyboard > .companion-orb {
+  opacity: 0;
+  scale: 0.9;
+}
+
+.dialogue-stage {
+  width: min(720px, calc(100% - 48px));
+  animation: dialogue-enter 360ms ease-out both;
+}
+
+@keyframes dialogue-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .input-mode-buttons {
@@ -103,13 +127,38 @@ body {
   bottom: 32px;
   left: 50%;
   z-index: 10;
-  display: flex;
-  gap: 10px;
+  width: 132px;
+  height: 64px;
   transform: translateX(-50%);
 }
 
 .input-mode-buttons .metal-fx-root {
   background: #000 !important;
+  position: absolute;
+  top: 10px;
+  transition:
+    left 280ms ease,
+    transform 280ms ease,
+    opacity 280ms ease;
+}
+
+.input-mode-buttons .metal-fx-root:first-child {
+  left: 0;
+}
+
+.input-mode-buttons .metal-fx-root:last-child {
+  left: 88px;
+}
+
+.input-mode-buttons[data-active-mode="keyboard"] .metal-fx-root:first-child {
+  left: -34px;
+  opacity: 0.72;
+  transform: scale(0.86);
+}
+
+.input-mode-buttons[data-active-mode="keyboard"] .metal-fx-root:last-child {
+  left: 50%;
+  transform: translateX(-50%) scale(1.3);
 }
 
 .input-mode-button {
