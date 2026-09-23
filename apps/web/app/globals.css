@@ -45,6 +45,8 @@ body {
     font-variation-settings 600ms ease,
     font-weight 600ms ease;
   text-wrap: pretty;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .dialogue span {
@@ -450,11 +452,14 @@ body {
   }
 }
 
-.keyboard-message-field input {
+.keyboard-message-field textarea {
   width: 100%;
   padding: 0;
   border: 0;
   outline: 0;
+  resize: none;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   caret-color: #fff;
   color: #fff;
   background: transparent;

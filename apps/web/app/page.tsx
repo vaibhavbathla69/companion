@@ -86,7 +86,7 @@ import {
 export default function HomePage() {
   const voiceRef = useRef<HTMLDivElement>(null);
   const keyboardRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const conversationRef = useRef<HTMLElement>(null);
   const [activeMode, setActiveMode] = useState<"idle" | "voice" | "keyboard">(
     "idle",
@@ -215,9 +215,10 @@ export default function HomePage() {
                 <label className="sr-only" htmlFor="keyboard-message">
                   Message
                 </label>
-                <input
+                <textarea
                   ref={inputRef}
                   id="keyboard-message"
+                  rows={2}
                   value={message}
                   onChange={(event) => setMessage(event.target.value)}
                   aria-label="Type a message"
