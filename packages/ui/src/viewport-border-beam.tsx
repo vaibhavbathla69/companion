@@ -8,7 +8,7 @@ export function ViewportBorderBeam({ children }: { children: ReactNode }) {
   return (
     <BorderBeam
       className="viewport-border-beam"
-      size="md"
+      size="pulse-inner"
       colorVariant="mono"
       theme="dark"
       borderRadius={0}
