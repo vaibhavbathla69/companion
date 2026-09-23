@@ -307,6 +307,17 @@ body {
   transform: translateX(-50%) scale(1.3);
 }
 
+.input-mode-buttons[data-active-mode="voice"] .metal-fx-root:first-child {
+  left: 50%;
+  transform: translateX(-50%) scale(1.3);
+}
+
+.input-mode-buttons[data-active-mode="voice"] .metal-fx-root:last-child {
+  left: 122px;
+  opacity: 0.72;
+  transform: scale(0.86);
+}
+
 .input-mode-button {
   position: relative;
   z-index: 2;
