@@ -76,6 +76,192 @@ body {
   font-weight: 500;
 }
 
+.life-state-panel {
+  position: fixed;
+  top: 34px;
+  right: 48px;
+  z-index: 6;
+  width: min(31vw, 350px);
+  color: #fff;
+  font-family: "Nohemi Variable", var(--font-sans), system-ui, sans-serif;
+  opacity: 0.28;
+  transition: opacity 900ms ease;
+}
+
+.life-state-panel:hover,
+.life-state-panel:focus-within {
+  opacity: 0.88;
+}
+
+.life-state-date {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 38px;
+}
+
+.life-state-date time:first-child {
+  display: grid;
+  gap: 1px;
+}
+
+.life-state-day {
+  font-size: clamp(52px, 4.2vw, 60px);
+  font-weight: 200;
+  line-height: 0.78;
+  letter-spacing: -0.065em;
+}
+
+.life-state-month,
+.life-state-time,
+.life-state-section h2,
+.life-state-item-meta {
+  font-size: 11px;
+  font-weight: 350;
+  letter-spacing: 0.13em;
+}
+
+.life-state-month {
+  margin-top: 8px;
+}
+
+.life-state-time {
+  padding-bottom: 1px;
+  opacity: 0.64;
+}
+
+.life-state-nav {
+  display: flex;
+  gap: 21px;
+  margin-bottom: 36px;
+}
+
+.life-state-nav button {
+  position: relative;
+  padding: 0 0 5px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 300;
+  opacity: 0.42;
+  transition: opacity 600ms ease;
+}
+
+.life-state-nav button::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(0.4);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+}
+
+.life-state-nav button.is-selected {
+  opacity: 1;
+}
+
+.life-state-nav button.is-selected::after {
+  opacity: 0.78;
+  transform: scaleX(1);
+}
+
+.life-state-section h2 {
+  margin: 0 0 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.life-state-items {
+  display: grid;
+  gap: 25px;
+}
+
+.life-state-item {
+  max-width: 255px;
+  opacity: 0.62;
+  transition: opacity 800ms ease;
+}
+
+.life-state-item.state-completed {
+  opacity: 0.25;
+}
+
+.life-state-item.state-now {
+  opacity: 1;
+}
+
+.life-state-item.state-important {
+  opacity: 0.78;
+}
+
+.life-state-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 5px;
+  opacity: 0.72;
+}
+
+.life-state-item-title,
+.life-state-item-description {
+  margin: 0;
+}
+
+.life-state-item-title {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+}
+
+.life-state-item.state-important .life-state-item-title,
+.life-state-item.state-now .life-state-item-title {
+  font-weight: 450;
+}
+
+.life-state-item-description {
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.3;
+  opacity: 0;
+  filter: blur(4px);
+  transition:
+    opacity 900ms ease,
+    filter 900ms ease;
+}
+
+.life-state-panel:hover .life-state-item-description,
+.life-state-panel:focus-within .life-state-item-description {
+  opacity: 0.62;
+  filter: blur(0);
+}
+
+.life-state-now-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px rgb(255 255 255 / 0.9);
+  animation: life-state-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes life-state-pulse {
+  50% {
+    opacity: 0.35;
+    box-shadow: 0 0 3px rgb(255 255 255 / 0.3);
+  }
+}
+
 .orb-composition-stage {
   position: relative;
   display: flex;
@@ -138,7 +324,7 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   min-height: 100%;
-  width: min(760px, calc(100% - 96px));
+  width: min(58vw, 760px);
   padding: 160px 0 64px;
   margin-left: 48px;
 }
