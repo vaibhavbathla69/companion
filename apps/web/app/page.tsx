@@ -36,12 +36,11 @@ export default function HomePage() {
             >
               <ThinkingOrb
                 state="composing"
-                size={64}
+                size={32}
                 dots={1}
                 dotSize={1}
                 theme="dark"
                 color="#d7b99d"
-                style={{ width: "54px", height: "54px" }}
               />
             </button>
           </MetalFx>
