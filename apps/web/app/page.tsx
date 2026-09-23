@@ -162,7 +162,7 @@ export default function HomePage() {
               colorVariant="colorful"
               theme="dark"
               active
-              scale={0.42}
+              scale={1}
             >
               <button
                 className="voice-screen"
