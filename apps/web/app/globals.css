@@ -39,6 +39,12 @@ body {
   padding: 0 16px;
 }
 
+.viewport-border-beam,
+.viewport-border-beam-content {
+  min-height: 100vh;
+  background: #000;
+}
+
 .orb-composition-stage > .companion-orb {
   width: 74px;
   height: 74px;
