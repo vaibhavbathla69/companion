@@ -34,7 +34,14 @@ export default function HomePage() {
               type="button"
               aria-label="Voice input"
             >
-              <ThinkingOrb state="composing" size={54} />
+              <ThinkingOrb
+                state="composing"
+                size={54}
+                dots={1}
+                dotSize={1}
+                theme="dark"
+                color="#d7b99d"
+              />
             </button>
           </MetalFx>
           <MetalFx
