@@ -11,6 +11,7 @@ export function ViewportBorderBeam({ children }: { children: ReactNode }) {
       size="pulse-inner"
       colorVariant="mono"
       theme="dark"
+      glowSize={1.6}
       borderRadius={0}
     >
       {children}
