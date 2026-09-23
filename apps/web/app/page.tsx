@@ -36,7 +36,6 @@ export default function HomePage() {
                 ref={inputRef}
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
-                placeholder="say something"
                 aria-label="Type a message"
               />
             </label>
