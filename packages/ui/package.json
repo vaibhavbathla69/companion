@@ -14,7 +14,6 @@
     "@companion/shared": "workspace:*",
     "border-beam": "1.4.1",
     "framer-motion": "13.4.1",
-    "liquid-gooey": "^0.2.2",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "thinking-orbs": "0.3.2"

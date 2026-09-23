@@ -284,9 +284,6 @@ importers:
       framer-motion:
         specifier: 13.4.1
         version: 13.4.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      liquid-gooey:
-        specifier: ^0.2.2
-        version: 0.2.2(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       react:
         specifier: 19.3.0
         version: 19.3.0
@@ -2033,12 +2030,6 @@ packages:
   lightningcss@1.33.0:
     resolution: {integrity: sha512-WkUDrojuJs0xkgGf2udWxa3yGBRxPtxUkB79i6aCZLRgc7PM8fZe9TosfPDcvEpQZbuFASnHYmRLBLUbmLOIIA==}
     engines: {node: '>= 12.0.0'}
-
-  liquid-gooey@0.2.2:
-    resolution: {integrity: sha512-UnnNSYdZoNHXowmHKo2pOF6suI1+pLMKf7qBMj1wT6wG3u0gqXP7qiLVMpCjJM2ETkr/GqF8n4fcuIgWb1fHQQ==}
-    peerDependencies:
-      react: '>=18'
-      react-dom: '>=18'
 
   locate-path@6.0.0:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
@@ -4365,11 +4356,6 @@ snapshots:
       lightningcss-linux-x64-musl: 1.33.0
       lightningcss-win32-arm64-msvc: 1.33.0
       lightningcss-win32-x64-msvc: 1.33.0
-
-  liquid-gooey@0.2.2(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
-    dependencies:
-      react: 19.3.0
-      react-dom: 19.3.0(react@19.3.0)
 
   locate-path@6.0.0:
     dependencies:
