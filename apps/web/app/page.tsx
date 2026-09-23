@@ -3,7 +3,7 @@
 import { AIMessage, CompanionOrb, ViewportBorderBeam } from "@companion/ui";
 import { MetalFx, useMetalBend } from "metal-fx";
 import { ThinkingOrb } from "thinking-orbs";
-import { useEffect, useRef, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 
 export default function HomePage() {
   const voiceRef = useRef<HTMLDivElement>(null);
@@ -11,12 +11,22 @@ export default function HomePage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [activeMode, setActiveMode] = useState<"voice" | "keyboard">("voice");
   const [message, setMessage] = useState("");
+  const [humanMessages, setHumanMessages] = useState<string[]>([]);
   useMetalBend(voiceRef);
   useMetalBend(keyboardRef);
 
   useEffect(() => {
     if (activeMode === "keyboard") inputRef.current?.focus();
   }, [activeMode]);
+
+  function submitMessage(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const nextMessage = message.trim();
+    if (!nextMessage) return;
+
+    setHumanMessages((messages) => [...messages, nextMessage]);
+    setMessage("");
+  }
 
   return (
     <ViewportBorderBeam>
@@ -30,15 +40,25 @@ export default function HomePage() {
                 { text: "been?", weight: 450 },
               ]}
             />
-            <label className="keyboard-message-field">
-              <span className="sr-only">Message</span>
+            {humanMessages.map((humanMessage, index) => (
+              <HumanMessage
+                key={`${index}-${humanMessage}`}
+                className="dialogue-human-enter"
+                segments={[{ text: humanMessage }]}
+              />
+            ))}
+            <form className="keyboard-message-field" onSubmit={submitMessage}>
+              <label className="sr-only" htmlFor="keyboard-message">
+                Message
+              </label>
               <input
                 ref={inputRef}
+                id="keyboard-message"
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
                 aria-label="Type a message"
               />
-            </label>
+            </form>
           </div>
         )}
         <div
