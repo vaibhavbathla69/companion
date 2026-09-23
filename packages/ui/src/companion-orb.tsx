@@ -104,7 +104,7 @@ export function CompanionOrb({
   );
 }
 
-/** A compact row using the library's distinct working/thinking treatment. */
+/** A compact row using the library's distinct composing treatment. */
 export function ThinkingOrbStrip({
   count = 11,
   className = "",
@@ -112,12 +112,12 @@ export function ThinkingOrbStrip({
   return (
     <div
       className={`thinking-orb-strip ${className}`}
-      aria-label="Companion is thinking"
+      aria-label="Companion is composing"
     >
       {Array.from({ length: count }, (_, index) => (
         <ThinkingOrb
           key={index}
-          state="working"
+          state="composing"
           size={20}
           speed={0.72 + (index % 3) * 0.08}
           theme="dark"
