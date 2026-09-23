@@ -39,30 +39,10 @@ body {
   padding: 0 16px;
 }
 
-.viewport-border-beam,
-.viewport-border-beam-content {
-  min-height: 100vh;
-  background: #000;
-}
-
 .viewport-border-beam {
+  min-height: 100vh;
   width: 100%;
-  border: 2px solid rgb(255 255 255 / 0.28);
-  box-shadow:
-    inset 0 0 18px rgb(255 255 255 / 0.06),
-    0 0 22px rgb(255 255 255 / 0.08);
-  isolation: isolate;
-}
-
-/* Keep the library's animated layers visible on the full-viewport wrapper. */
-.viewport-border-beam[data-active]::before,
-.viewport-border-beam[data-active]::after {
-  opacity: 1 !important;
-}
-
-.viewport-border-beam[data-active] [data-beam-bloom] {
-  display: block !important;
-  opacity: 0.45 !important;
+  background: #000;
 }
 
 .orb-composition-stage > .companion-orb {

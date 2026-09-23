@@ -8,17 +8,12 @@ export function ViewportBorderBeam({ children }: { children: ReactNode }) {
   return (
     <BorderBeam
       className="viewport-border-beam"
-      size="pulse-outside"
+      size="md"
       colorVariant="mono"
       theme="dark"
-      staticColors
-      strength={0.86}
-      brightness={1}
-      saturation={0}
-      glowSize={1}
       borderRadius={0}
     >
-      <div className="viewport-border-beam-content">{children}</div>
+      {children}
     </BorderBeam>
   );
 }
