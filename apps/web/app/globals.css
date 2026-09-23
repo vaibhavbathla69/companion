@@ -124,6 +124,11 @@ body {
   scroll-behavior: smooth;
 }
 
+.orb-composition-stage.mode-voice .dialogue-stage {
+  bottom: clamp(240px, 38dvh, 520px);
+  z-index: 5;
+}
+
 .dialogue-stage::-webkit-scrollbar {
   display: none;
 }
