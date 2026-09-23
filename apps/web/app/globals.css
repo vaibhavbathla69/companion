@@ -64,13 +64,14 @@ body {
 }
 
 .typing-liquid-bar {
-  position: absolute;
+  position: fixed;
   bottom: 32px;
   left: 50%;
   width: min(560px, calc(100% - 32px));
   margin-inline: auto;
   border-radius: 999px;
   transform: translateX(-50%);
+  z-index: 10;
 }
 
 .typing-liquid-bar-content {
