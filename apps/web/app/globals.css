@@ -160,14 +160,21 @@ body {
   width: min(440px, 100%);
 }
 
-.voice-message-field {
+.voice-message-dock {
   position: fixed;
-  right: 0;
-  bottom: -1px;
-  left: 0;
+  inset: auto 0 0;
   z-index: 4;
   width: 100dvw;
   height: clamp(240px, 38dvh, 520px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.voice-message-field {
+  width: 100% !important;
+  height: calc(100% + 2px) !important;
+  transform: translateY(2px);
+  pointer-events: auto;
 }
 
 .voice-screen {

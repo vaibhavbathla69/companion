@@ -22,7 +22,9 @@ export default function HomePage() {
   const keyboardRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const conversationRef = useRef<HTMLElement>(null);
-  const [activeMode, setActiveMode] = useState<"voice" | "keyboard">("voice");
+  const [activeMode, setActiveMode] = useState<"idle" | "voice" | "keyboard">(
+    "idle",
+  );
   const [message, setMessage] = useState("");
   const [humanMessages, setHumanMessages] = useState<string[]>([]);
   const [isReviewingHistory, setIsReviewingHistory] = useState(false);
@@ -42,7 +44,7 @@ export default function HomePage() {
   }, [activeMode]);
 
   useEffect(() => {
-    if (activeMode !== "keyboard") return;
+    if (activeMode === "idle") return;
     const conversation = conversationRef.current;
     if (!conversation) return;
 
@@ -71,112 +73,117 @@ export default function HomePage() {
     <ViewportBorderBeam>
       <main className={`orb-composition-stage mode-${activeMode}`}>
         <CompanionOrb state="solving" intensity={0.8} />
-        <>
-          <section
-            ref={conversationRef}
-            className={`dialogue-stage${isReviewingHistory ? " is-reviewing-history" : ""}`}
-            aria-live="polite"
-            aria-label="Conversation"
-            onScroll={(event) => {
-              const { scrollHeight, scrollTop, clientHeight } =
-                event.currentTarget;
-              setIsReviewingHistory(
-                scrollTop < scrollHeight - clientHeight - 24,
-              );
-            }}
-          >
-            <div className="dialogue-stack">
-              <div
-                className="dialogue-turn"
-                data-age={humanMessages.length}
-                style={
-                  {
-                    "--conversation-opacity": Math.max(
-                      0.14,
-                      1 - humanMessages.length * 0.2,
-                    ),
-                  } as CSSProperties
-                }
-              >
-                <AIMessage
-                  segments={[
+        {activeMode !== "idle" && (
+          <>
+            <section
+              ref={conversationRef}
+              className={`dialogue-stage${isReviewingHistory ? " is-reviewing-history" : ""}`}
+              aria-live="polite"
+              aria-label="Conversation"
+              onScroll={(event) => {
+                const { scrollHeight, scrollTop, clientHeight } =
+                  event.currentTarget;
+                setIsReviewingHistory(
+                  scrollTop < scrollHeight - clientHeight - 24,
+                );
+              }}
+            >
+              <div className="dialogue-stack">
+                <div
+                  className="dialogue-turn"
+                  data-age={humanMessages.length}
+                  style={
                     {
-                      text: "I remember you said you'd be back at ",
-                      weight: 200,
-                    },
-                    { text: "six", weight: 450 },
-                    {
-                      text: ". I stayed awake a little longer, just in case. The night got quiet, and I kept thinking about what you might say when you finally came back.",
-                      weight: 200,
-                    },
-                  ]}
-                />
-              </div>
-              {humanMessages.map((humanMessage, index) => {
-                const age = humanMessages.length - index - 1;
-                return (
-                  <div
-                    key={`${index}-${humanMessage}`}
-                    className="dialogue-turn"
-                    data-age={age}
-                    style={
+                      "--conversation-opacity": Math.max(
+                        0.14,
+                        1 - humanMessages.length * 0.2,
+                      ),
+                    } as CSSProperties
+                  }
+                >
+                  <AIMessage
+                    segments={[
                       {
-                        "--conversation-opacity": [1, 0.82, 0.58, 0.34, 0.16][
-                          Math.min(age, 4)
-                        ],
-                      } as CSSProperties
+                        text: "I remember you said you'd be back at ",
+                        weight: 200,
+                      },
+                      { text: "six", weight: 450 },
+                      {
+                        text: ". I stayed awake a little longer, just in case. The night got quiet, and I kept thinking about what you might say when you finally came back.",
+                        weight: 200,
+                      },
+                    ]}
+                  />
+                </div>
+                {humanMessages.map((humanMessage, index) => {
+                  const age = humanMessages.length - index - 1;
+                  return (
+                    <div
+                      key={`${index}-${humanMessage}`}
+                      className="dialogue-turn"
+                      data-age={age}
+                      style={
+                        {
+                          "--conversation-opacity": [1, 0.82, 0.58, 0.34, 0.16][
+                            Math.min(age, 4)
+                          ],
+                        } as CSSProperties
+                      }
+                    >
+                      <HumanMessage
+                        className="dialogue-human-enter"
+                        segments={[{ text: humanMessage }]}
+                      />
+                      <AIMessage
+                        className="dialogue-ai-reply dialogue-ai-enter"
+                        segments={dummyResponses[index % dummyResponses.length]}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+            {activeMode === "keyboard" && (
+              <form className="keyboard-message-field" onSubmit={submitMessage}>
+                <label className="sr-only" htmlFor="keyboard-message">
+                  Message
+                </label>
+                <input
+                  ref={inputRef}
+                  id="keyboard-message"
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
+                  aria-label="Type a message"
+                />
+              </form>
+            )}
+            {activeMode === "voice" && (
+              <div className="voice-message-dock">
+                <VoiceBeam
+                  className="voice-message-field"
+                  type="mobile"
+                  stream={mic.stream}
+                  processing={mic.state === "requesting"}
+                  colorVariant="colorful"
+                  theme="dark"
+                  active
+                  scale={1}
+                >
+                  <button
+                    className="voice-screen"
+                    type="button"
+                    onClick={() => void activateVoice()}
+                    aria-label={
+                      mic.state === "live" ? "Listening" : "Start listening"
                     }
                   >
-                    <HumanMessage
-                      className="dialogue-human-enter"
-                      segments={[{ text: humanMessage }]}
-                    />
-                    <AIMessage
-                      className="dialogue-ai-reply dialogue-ai-enter"
-                      segments={dummyResponses[index % dummyResponses.length]}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-          {activeMode === "keyboard" ? (
-            <form className="keyboard-message-field" onSubmit={submitMessage}>
-              <label className="sr-only" htmlFor="keyboard-message">
-                Message
-              </label>
-              <input
-                ref={inputRef}
-                id="keyboard-message"
-                value={message}
-                onChange={(event) => setMessage(event.target.value)}
-                aria-label="Type a message"
-              />
-            </form>
-          ) : (
-            <VoiceBeam
-              className="voice-message-field"
-              type="mobile"
-              stream={mic.stream}
-              processing={mic.state === "requesting"}
-              colorVariant="colorful"
-              theme="dark"
-              active
-              scale={1}
-            >
-              <button
-                className="voice-screen"
-                type="button"
-                onClick={() => void activateVoice()}
-                aria-label={
-                  mic.state === "live" ? "Listening" : "Start listening"
-                }
-              >
-                <span className="voice-screen-status" aria-hidden="true" />
-              </button>
-            </VoiceBeam>
-          )}
-        </>
+                    <span className="voice-screen-status" aria-hidden="true" />
+                  </button>
+                </VoiceBeam>
+              </div>
+            )}
+          </>
+        )}
         <div
           className="input-mode-buttons"
           role="group"
