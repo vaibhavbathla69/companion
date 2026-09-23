@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Nohemi Variable";
+  src: url("/fonts/nohemi-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+}
+
 :root {
   --ink: #ebe6df;
   --muted: #958f89;
@@ -26,6 +34,41 @@ body {
   background: #000;
   font-family: var(--font-sans), system-ui, sans-serif;
   letter-spacing: -0.015em;
+}
+
+.dialogue {
+  margin: 0;
+  font-family: "Nohemi Variable", var(--font-sans), system-ui, sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "wght" 200;
+  transition: font-variation-settings 220ms ease;
+  text-wrap: pretty;
+}
+
+.dialogue span {
+  transition: font-weight 220ms ease;
+}
+
+.dialogue-ai {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 200;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.dialogue-ai span {
+  font-weight: 200;
+}
+
+.dialogue-human {
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.dialogue-human span {
+  font-weight: 500;
 }
 
 .orb-composition-stage {
