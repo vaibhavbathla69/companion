@@ -156,32 +156,6 @@ export default function HomePage() {
               }}
             >
               <div className="dialogue-stack">
-                <div
-                  className="dialogue-turn"
-                  data-age={humanMessages.length}
-                  style={
-                    {
-                      "--conversation-opacity": Math.max(
-                        0.14,
-                        1 - humanMessages.length * 0.2,
-                      ),
-                    } as CSSProperties
-                  }
-                >
-                  <AIMessage
-                    segments={[
-                      {
-                        text: "I remember you said you'd be back at ",
-                        weight: 200,
-                      },
-                      { text: "six", weight: 450 },
-                      {
-                        text: ". I stayed awake a little longer, just in case. The night got quiet, and I kept thinking about what you might say when you finally came back.",
-                        weight: 200,
-                      },
-                    ]}
-                  />
-                </div>
                 {humanMessages.map((humanMessage, index) => {
                   const age = humanMessages.length - index - 1;
                   return (
