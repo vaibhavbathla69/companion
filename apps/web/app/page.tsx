@@ -1,9 +1,15 @@
 "use client";
 
 import { CompanionOrb, ViewportBorderBeam } from "@companion/ui";
-import { MetalFx } from "metal-fx";
+import { MetalFx, useMetalBend } from "metal-fx";
+import { useRef } from "react";
 
 export default function HomePage() {
+  const voiceRef = useRef<HTMLDivElement>(null);
+  const keyboardRef = useRef<HTMLDivElement>(null);
+  useMetalBend(voiceRef);
+  useMetalBend(keyboardRef);
+
   return (
     <ViewportBorderBeam>
       <main className="orb-composition-stage">
@@ -14,35 +20,35 @@ export default function HomePage() {
           aria-label="Input mode"
         >
           <MetalFx
-            preset="silver"
-            strength={1}
-            theme="dark"
-            variant="button"
+            ref={voiceRef}
+            preset="chromatic"
+            variant="circle"
             innerShadow
+            strength={0.9}
+            reflectionTargets={[keyboardRef]}
           >
             <button
               className="input-mode-button"
               type="button"
               aria-label="Voice input"
             >
-              <span aria-hidden="true">◉</span>
-              <span>Voice</span>
+              ◉
             </button>
           </MetalFx>
           <MetalFx
-            preset="silver"
-            strength={1}
-            theme="dark"
-            variant="button"
+            ref={keyboardRef}
+            preset="chromatic"
+            variant="circle"
             innerShadow
+            strength={0.9}
+            reflectionTargets={[voiceRef]}
           >
             <button
               className="input-mode-button"
               type="button"
               aria-label="Keyboard input"
             >
-              <span aria-hidden="true">⌨</span>
-              <span>Keyboard</span>
+              ⌨
             </button>
           </MetalFx>
         </div>
