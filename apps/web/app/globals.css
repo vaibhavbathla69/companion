@@ -70,11 +70,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-width: 112px;
-  height: 44px;
+  width: 64px;
+  min-width: 64px;
+  height: 64px;
   padding: 0 16px;
   border: 1px solid rgb(255 255 255 / 0.14);
-  border-radius: 12px;
+  border-radius: 50%;
   color: #e7e2dc;
   background: linear-gradient(145deg, #292929, #151515);
   box-shadow:

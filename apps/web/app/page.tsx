@@ -2,6 +2,7 @@
 
 import { CompanionOrb, ViewportBorderBeam } from "@companion/ui";
 import { MetalFx, useMetalBend } from "metal-fx";
+import { ThinkingOrb } from "thinking-orbs";
 import { useRef } from "react";
 
 export default function HomePage() {
@@ -32,7 +33,7 @@ export default function HomePage() {
               type="button"
               aria-label="Voice input"
             >
-              ◉
+              <ThinkingOrb state="composing" size={64} />
             </button>
           </MetalFx>
           <MetalFx
