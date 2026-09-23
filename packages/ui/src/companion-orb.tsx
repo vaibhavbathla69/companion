@@ -18,6 +18,11 @@ export interface CompanionOrbProps {
   className?: string;
 }
 
+export interface ThinkingOrbStripProps {
+  count?: number;
+  className?: string;
+}
+
 type ThinkingOrbState =
   | "working"
   | "searching"
@@ -96,5 +101,30 @@ export function CompanionOrb({
       />
       <div className="orb-atmosphere" aria-hidden="true" />
     </motion.div>
+  );
+}
+
+/** A compact row using the library's distinct working/thinking treatment. */
+export function ThinkingOrbStrip({
+  count = 11,
+  className = "",
+}: ThinkingOrbStripProps) {
+  return (
+    <div
+      className={`thinking-orb-strip ${className}`}
+      aria-label="Companion is thinking"
+    >
+      {Array.from({ length: count }, (_, index) => (
+        <ThinkingOrb
+          key={index}
+          state="working"
+          size={20}
+          speed={0.72 + (index % 3) * 0.08}
+          theme="dark"
+          color="#d7b99d"
+          aria-hidden="true"
+        />
+      ))}
+    </div>
   );
 }
