@@ -60,7 +60,7 @@ const colorMap: Record<CompanionOrbState, string> = {
   idle: "#d7b99d",
   listening: "#b9c9c0",
   thinking: "#bcb2cb",
-  solving: "#d7b99d",
+  solving: "#ffffff",
   speaking: "#e1c3a4",
   happy: "#e6c9a1",
   concerned: "#afbdc3",
