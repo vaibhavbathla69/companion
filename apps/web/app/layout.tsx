@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Manrope, Newsreader } from "next/font/google";
 import "./globals.css";
 
@@ -18,19 +17,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${sans.variable} ${serif.variable}`}>
         <div className="ambient-bg" aria-hidden="true" />
-        <header className="app-header">
-          <Link className="wordmark" href="/" aria-label="Companion home">
-            <span>C</span>
-            <strong>Companion</strong>
-          </Link>
-          <nav aria-label="Primary navigation">
-            <Link href="/today">Today</Link>
-            <Link href="/memory">Memory</Link>
-          </nav>
-          <div className="presence-indicator">
-            <span /> awake
-          </div>
-        </header>
         {children}
       </body>
     </html>

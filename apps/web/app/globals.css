@@ -23,11 +23,23 @@ body {
   min-height: 100vh;
   margin: 0;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 50% 25%, rgb(75 60 50 / 0.12), transparent 36rem),
-    linear-gradient(145deg, #111112 0%, #0c0d0e 60%, #10100f 100%);
+  background: #000;
   font-family: var(--font-sans), system-ui, sans-serif;
   letter-spacing: -0.015em;
+}
+
+.orb-only-stage {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.orb-only-stage .companion-orb {
+  width: min(260px, 62vw);
+  height: min(260px, 62vw);
+  margin: 0;
 }
 
 button,
@@ -45,12 +57,7 @@ a {
 }
 
 .ambient-bg {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.35;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+  display: none;
 }
 
 .app-header {

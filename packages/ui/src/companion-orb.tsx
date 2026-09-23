@@ -7,6 +7,7 @@ export type CompanionOrbState =
   | "idle"
   | "listening"
   | "thinking"
+  | "solving"
   | "speaking"
   | "happy"
   | "concerned"
@@ -32,6 +33,7 @@ const stateMap: Record<CompanionOrbState, ThinkingOrbState> = {
   idle: "breathing",
   listening: "listening",
   thinking: "searching",
+  solving: "solving",
   speaking: "composing",
   happy: "shaping",
   concerned: "connecting",
@@ -42,6 +44,7 @@ const labelMap: Record<CompanionOrbState, string> = {
   idle: "Companion is present",
   listening: "Companion is listening",
   thinking: "Companion is thinking",
+  solving: "Companion is solving",
   speaking: "Companion is speaking",
   happy: "Companion is happy",
   concerned: "Companion is concerned",
@@ -52,6 +55,7 @@ const colorMap: Record<CompanionOrbState, string> = {
   idle: "#d7b99d",
   listening: "#b9c9c0",
   thinking: "#bcb2cb",
+  solving: "#d7b99d",
   speaking: "#e1c3a4",
   happy: "#e6c9a1",
   concerned: "#afbdc3",
